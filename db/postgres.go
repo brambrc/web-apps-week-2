@@ -23,6 +23,7 @@ func NewDB(host, username, password, database string, port int) *Postgres {
 
 func (p *Postgres) Migrate() {
 	p.g.AutoMigrate(&Quotes{})
+	p.g.AutoMigrate(&Users{})
 }
 
 func (p *Postgres) DB() *gorm.DB {
