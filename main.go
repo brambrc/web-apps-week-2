@@ -24,6 +24,8 @@ func main() {
 	model := model.NewQuoteModel(conn)
 	controller := controller.NewQuoteController(model)
 
+	//edit or alter these code to include user model and controller
+
 	router := routes.NewRoute(controller)
 
 	fmt.Println("starting api server at http://localhost:8080")
