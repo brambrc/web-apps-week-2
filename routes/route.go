@@ -29,4 +29,6 @@ func (r *Route) routes() {
 	r.mux.Handle("/select", r.get(http.HandlerFunc(r.quote.Show)))
 	r.mux.Handle("/count", r.get(http.HandlerFunc(r.quote.Count)))
 	r.mux.Handle("/add", r.post(http.HandlerFunc(r.quote.Store)))
+
+	//add more routes for users here
 }

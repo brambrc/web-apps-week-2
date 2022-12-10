@@ -11,9 +11,9 @@ import (
 
 func main() {
 	db := db.NewDB(
-		"192.168.0.101",
+		"localhost",
 		"postgres",
-		"password",
+		"Kmzway87a@",
 		"quoteapp",
 		5432,
 	)
