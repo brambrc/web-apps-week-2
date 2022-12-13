@@ -11,7 +11,7 @@ import (
 
 func main() {
 	db := db.NewDB(
-		"192.168.0.101",
+		"192.168.0.102",
 		"postgres",
 		"password",
 		"quoteapp",
@@ -21,11 +21,14 @@ func main() {
 	db.Migrate()
 	conn := db.DB()
 
-	model := model.NewQuoteModel(conn)
-	controller := controller.NewQuoteController(model)
+	qm := model.NewQuoteModel(conn)
+	qoute := controller.NewQuoteController(qm)
 
-	router := routes.NewRoute(controller)
+	usermodel := model.NewUsersModel(conn)
+	usercontroller := controller.NewUsersController(usermodel)
+
+	router := routes.NewRoute(qoute, usercontroller)
 
 	fmt.Println("starting api server at http://localhost:8080")
-	http.ListenAndServe(":8080", router.Run())
+	panic(http.ListenAndServe(":8080", router.Run()))
 }
