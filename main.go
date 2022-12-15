@@ -13,20 +13,23 @@ func main() {
 	db := db.NewDB(
 		"localhost",
 		"postgres",
-		"Kmzway87a@",
-		"quoteapp",
+		"warva14",
+		"test",
 		5432,
 	)
 
 	db.Migrate()
 	conn := db.DB()
 
-	model := model.NewQuoteModel(conn)
-	controller := controller.NewQuoteController(model)
+	quoteModel := model.NewQuoteModel(conn)
+	quoteMontroller := controller.NewQuoteController(quoteModel)
+
+	usermodel := model.NewUsersModel(conn)
+	usercontroller := controller.NewUsersController(usermodel)
 
 	//edit or alter these code to include user model and controller
 
-	router := routes.NewRoute(controller)
+	router := routes.NewRoute(quoteMontroller, usercontroller)
 
 	fmt.Println("starting api server at http://localhost:8080")
 	http.ListenAndServe(":8080", router.Run())
